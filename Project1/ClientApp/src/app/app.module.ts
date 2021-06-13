@@ -7,11 +7,15 @@ import { RouterModule } from '@angular/router';
 import { AppComponent } from './app.component';
 import { NavMenuComponent } from './nav-menu/nav-menu.component';
 import { HomeComponent } from './home/home.component';
+import { RestaurantAllComponent } from './restaurant-all/restaurant-all.component';
+import { RegisterComponent } from './register/register.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     NavMenuComponent,
+    RestaurantAllComponent,
+    RegisterComponent,
     HomeComponent,
   ],
   imports: [
@@ -20,6 +24,8 @@ import { HomeComponent } from './home/home.component';
     FormsModule,
     RouterModule.forRoot([
       { path: '', component: HomeComponent, pathMatch: 'full' },
+      { path: 'restaurant-all', component: RestaurantAllComponent },
+      { path: 'register', component: RegisterComponent },
     ])
   ],
   providers: [],

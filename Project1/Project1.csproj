@@ -24,7 +24,17 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Remove="ClientApp\src\app\IRestaurant.ts" />
+    <None Remove="ClientApp\src\app\restaurant-all\Restaurant.ts" />
+    <None Remove="ClientApp\src\app\Restaurant.ts" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Folder Include="Controllers\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <TypeScriptCompile Include="ClientApp\src\app\restaurant-all\Restaurant.ts" />
   </ItemGroup>
 
   <Target Name="DebugEnsureNodeEnv" BeforeTargets="Build" Condition=" '$(Configuration)' == 'Debug' And !Exists('$(SpaRoot)node_modules') ">
