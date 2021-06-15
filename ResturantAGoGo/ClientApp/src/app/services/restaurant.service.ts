@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Restaurant } from './restaurant';
+import { Restaurant } from '../restaurant';
 import { HttpHeaders } from '@angular/common/http';
 
 //We are using angular 12

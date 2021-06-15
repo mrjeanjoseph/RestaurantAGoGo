@@ -1,15 +1,20 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { Favorite } from '../Favorite';
+import { Restaurant } from '../restaurant';
 
 @Component({
   selector: 'app-favorite',
   templateUrl: './favorite.component.html',
   styleUrls: ['./favorite.component.css']
 })
-export class FavoriteComponent implements OnInit {
+export class FavoriteComponent {
 
-  constructor() { }
+  constructor(private service: Restaurant, public router: Router) {
 
-  ngOnInit(): void {
   }
+  favList: Favorite[] = [];
+  restaurants: Restaurant[] = [];
+  favCatogory: Restaurant[] = [];
 
 }

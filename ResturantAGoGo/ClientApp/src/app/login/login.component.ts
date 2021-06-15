@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { AuthenticateService } from '../authenticate.service';
-import { DatastoreService } from '../datastore.service';
+import { AuthenticateService } from '../services/authenticate.service';
+import { DatastoreService } from '../services/datastore.service';
 
 @Component({
   selector: 'app-login',
@@ -18,7 +18,7 @@ export class LoginComponent implements OnInit {
   errorMessage = '';
   roles: string[] = [];
 
-  constructor(private authService: AuthenticateService, private tokenStorage: DatastoreService) { }
+  constructor(private service: AuthenticateService, private tokenStorage: DatastoreService) { }
 
   ngOnInit(): void {
     if (this.tokenStorage.getToken()) {
@@ -30,7 +30,7 @@ export class LoginComponent implements OnInit {
   onSubmit(): void {
     const { username, password } = this.form;
 
-    this.authService.login(username, password).subscribe(
+    this.service.login(username, password).subscribe(
       data => {
         this.tokenStorage.saveToken(data.accessToken);
         this.tokenStorage.saveUser(data);

@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 
-const dbApi = 'api/from/backend/db';
+const dbApi = 'https://localhost:44334/api/restaurant/getuser?userId=';
 @Injectable({
   providedIn: 'root'
 })
