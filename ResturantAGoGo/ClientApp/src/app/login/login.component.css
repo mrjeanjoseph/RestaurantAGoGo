@@ -1,0 +1,8 @@
+
+.centertheform {
+  /*This is to position the card below right smack to the middle of the viewport*/
+  margin: 0 auto; /* Added */
+  float: none; /* Added */
+  margin-bottom: 10px; /* Added */
+  margin-top: 25px; /* Added */
+}
