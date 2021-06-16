@@ -6,9 +6,12 @@ export interface Restaurant {
   zip: number;
   openNow: boolean;
   type: Category[];
+  yelpID: string;
   img: string;
+  url: string;
 }
-interface Category {
+
+export interface Category {
   alias: string;
   title: string;
 }

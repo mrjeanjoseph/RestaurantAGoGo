@@ -23,13 +23,15 @@ export class HomepageComponent implements OnInit {
         response.businesses.forEach((b: any) => {
           let restaurant: Restaurant = {
             name: b.name,
+            yelpID: b.id,
             address: b.location.address1,
             city: b.location.city,
             state: b.location.state,
             zip: b.location.zip_code,
             openNow: b.is_closed,
             type: b.categories,
-            img: b.image_url
+            img: b.image_url,
+            url: b.urlId // there maybe a bug there
           }
           this.restaurantList.push(restaurant);
         })

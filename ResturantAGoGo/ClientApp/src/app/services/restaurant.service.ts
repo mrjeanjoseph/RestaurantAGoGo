@@ -1,7 +1,9 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Restaurant } from '../restaurant';
 import { HttpHeaders } from '@angular/common/http';
+import { Favorite } from '../Favorite';
+import { Router } from '@angular/router';
 
 //We are using angular 12
 @Injectable({
@@ -9,41 +11,106 @@ import { HttpHeaders } from '@angular/common/http';
 })
 export class RestaurantService {
 
+  zip_code = "";
+  categories = "";
+  apiUrl: string = `/yelp/businesses/search?location=${this.zip_code}&sort_by=distance&limit=50&term=restaurants&radius=40000&categories=${this.categories}`;
+  constructor(private http: HttpClient, public router: Router) {
+
+  }
+  baseUrl!: string;
   restaurants: Restaurant[] = [];
-  userName: string = "";
-  password: string = "";
-  zipCode: string = ""; 
-  
-  //apiUrl: string = `/yelp/businesses/search?location=${this.zipCode}&sort_by=distance&limit=50&categories=restaurants/`;
-  apiUrl: string = `/yelp/businesses/search?location=${this.zipCode}&sort_by=distance&limit=50&term=restaurants&radius=40000&categories=`;
+  favorites: Favorite[] = [];
+  fav: Favorite = {
+    favoriteId: -1,
+    userId: -1,
+    yelpId: '',
+    restaurantName: '',
+    restaurantAddress: '',
+    img: ''
+  };
 
 
+  //To get the restaurants details 
 
-  //inject HttpClient here!
-  constructor(private http: HttpClient) { }
+  setZip(zip_code: string): any {
+    this.zip_code = zip_code;
+  }
 
 
-  //Getting a list of restaurant
+  setCategory(categories: string): any {
+    this.categories = categories;
+  }
+
+
   getAllRestaurants(): any {
-    return this.http.get(this.apiUrl);
+    return this.http.get(`/yelp/businesses/search?location=${this.zip_code}&sort_by=distance&limit=50&term=restaurants&radius=40000&categories=${this.categories}`);
+    // return this.http.get(this.apiUrl); need to ask
+  }
+
+  getMyFavorites(): any {
+    return this.http.get(this.baseUrl + "api/Restaurant/getmyfavorites");
   }
 
 
-  //Favorite section
-  setLogin(newlogin: string): void {
-    this.userName = newlogin;
+
+
+  currentId: number = -1;
+
+  setID(newId: number): void {
+    this.currentId = newId;
+
   }
 
-  getLogin(): string {
-    return this.userName;
+  getID(): number {
+    return this.currentId;
+  }
+  //https://localhost:44334/api/Restaurant/addfavorite?userId=3&catoryId=mex123&restaurantName=Mexican&restaurantAddress=Troy&img=sdds233
+  addFavorite(id: number) {
+    let newFavorite: Favorite = {
+      favoriteId: 0, // previously was null
+      userId: this.currentId,
+      yelpId: this.categories,
+      restaurantName: this.categories,
+      restaurantAddress: this.categories,
+      img: this.categories
+    };
+
+    const params = new HttpParams();
+    //need to fix this code
+    return this.http.post(this.baseUrl + "api/Restaurant/addfavorite?userId=" + newFavorite.userId + "&catoryId=" + newFavorite.yelpId + "&restaurantName=" + newFavorite.restaurantName + "&restaurantAddress=" + newFavorite.restaurantAddress, params)
+      .subscribe(data => {
+        console.log(data);
+      },
+        error => {
+          console.log(error);
+        }
+      );
+
   }
 
-  httpOptions = {
-    headers: new HttpHeaders(
-      {
-        'Content-Type': 'application/json'
+  //password: string = "";
+
+  //setPassword(newPass: string): void {
+  //  this.currentPass = newPass;
+
+  //}
+
+  //getPassword(): string {
+  //  return this.currentPass;
+  //}
+
+
+  //Remove Favorite
+  //https://localhost:44334/api/Restaurant/deletefav?userId=1&favId=2
+  removeFavorite(favoriteId: number, userId: number) {
+    //need to fix this code
+    return this.http.delete(this.baseUrl + "/api/Restaurant/deletefav?userId=" + userId + "&favId=" + favoriteId).subscribe(data => {
+      console.log(data);
+    },
+      error => {
+        console.log(error);
       }
-    )
+    );
   }
 
 }
