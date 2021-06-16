@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Restaurant } from '../restaurant';
 import { RestaurantService } from '../services/restaurant.service';
 
@@ -11,31 +12,45 @@ export class HomepageComponent implements OnInit {
 
   restaurantList: Restaurant[] = [];
 
-  constructor(private service: RestaurantService) { }
+  /** RestaurantAll ctor */
+  constructor(private service: RestaurantService, private route: ActivatedRoute, public router: Router) {
+
+  }
 
   ngOnInit(): void {
     this.getRestaurants();
   }
 
-  getRestaurants(): any {
+  getRestaurants(): void {
     this.service.getAllRestaurants().subscribe(
       (response: any) => {
         response.businesses.forEach((b: any) => {
+          //console.log(b);
           let restaurant: Restaurant = {
             name: b.name,
-            yelpID: b.id,
             address: b.location.address1,
             city: b.location.city,
             state: b.location.state,
             zip: b.location.zip_code,
-            openNow: b.is_closed,
             type: b.categories,
+            yelpID: b.id,
             img: b.image_url,
-            url: b.urlId // there maybe a bug there
+            url: b.url,
           }
           this.restaurantList.push(restaurant);
         })
-      }
-    );
+        console.log(response);
+      });
   }
+
+  addFavorite(restaurant: Restaurant) {
+    this.service.addFavorite(restaurant);
+    this.router.navigate(['welcomepage']);
+  }
+
+  removeFavorite(userId: number, favId: number) {
+    this.service.removeFavorite(userId, favId);
+    this.router.navigate(['favorite']);
+  }
+
 }

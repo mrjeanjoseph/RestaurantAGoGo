@@ -27,7 +27,7 @@
   <div class="card card-container">
     <form *ngIf="!isSuccessful"
           name="form"
-          (ngSubmit)="f.form.valid && onSubmit()"
+          (ngSubmit)="f.form.valid && onSubmit(f)"
           #f="ngForm"
           novalidate>
       <div class="form-group">
@@ -39,7 +39,7 @@
                minlength="3"
                maxlength="20"
                #username="ngModel"
-               placeholder="Create a username"/>
+               placeholder="Create a username" />
         <div class="alert-danger" *ngIf="username.errors && f.submitted">
           <div *ngIf="username.errors.required">Username is required</div>
           <div *ngIf="username.errors.minlength">
@@ -58,7 +58,7 @@
                required
                minlength="6"
                #password="ngModel"
-               placeholder="Create a password"/>
+               placeholder="Create a password" />
         <div class="alert-danger" *ngIf="password.errors && f.submitted">
           <div *ngIf="password.errors.required">Password is required</div>
           <div *ngIf="password.errors.minlength">
@@ -69,12 +69,10 @@
       <div class="form-group">
         <button class="btn btn-primary btn-block">Register</button>
       </div>
-
       <div class="alert alert-warning" *ngIf="f.submitted && isSignUpFailed">
         Signup failed!<br />{{ errorMessage }}
       </div>
     </form>
-
     <div class="alert alert-success" *ngIf="isSuccessful">
       Your registration is successful!
     </div>
