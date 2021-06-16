@@ -2,12 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
-
-const dbApi = 'https://localhost:44334/api/restaurant/getuser?userId=';
-
-const httpOptions = {
-  headers: new HttpHeaders({ 'Content-Type': 'application/json' })
-};
+const dbApi = 'https://localhost:44334/api/Restaurant';
 
 @Injectable({
   providedIn: 'root'
@@ -16,18 +11,15 @@ const httpOptions = {
 export class AuthenticateService {
   constructor(private http: HttpClient) { }
 
-  login(username: string, password: string): Observable<any> {
-    return this.http.post(dbApi + 'signin', {
-      username,
-      password
-    }, httpOptions);
+  login(userName: string, password: string): Observable<any> {
+    return this.http.get(dbApi + `/getuserinfo?userName=${userName}&password=${password}`, {
+    });
   }
 
-  register(username: string, /*email: string,*/ password: string): Observable<any> {
-    return this.http.post(dbApi + 'register', {
-      username,
-      //email,
-      password
-    }, httpOptions);
+  register(userName: string, password: string): Observable<any> {
+    console.log(userName);
+    console.log(password);
+    return this.http.post(dbApi + `/adduser?userName=${userName}&password=${password}`, {
+    });
   }
 }

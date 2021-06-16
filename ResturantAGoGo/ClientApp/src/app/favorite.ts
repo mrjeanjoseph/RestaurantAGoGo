@@ -5,10 +5,4 @@ export interface Favorite{
   restaurantName: string;
   restaurantAddress: string;
   img: string;
-
-}
-
-export interface Category {
-  alias: string;
-  title: string;
 }

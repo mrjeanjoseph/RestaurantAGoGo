@@ -4,14 +4,13 @@ export interface Restaurant {
   city: string;
   state: string;
   zip: number;
-  openNow: boolean;
   type: Category[];
   yelpID: string;
   img: string;
   url: string;
 }
 
-export interface Category {
+interface Category {
   alias: string;
   title: string;
 }
