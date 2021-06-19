@@ -1,36 +1,60 @@
-import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { AppRoutingModule } from './app-routing.module';
-import { HttpClientModule } from '@angular/common/http';
-import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
+import { RouterModule } from '@angular/router';
 
 import { AppComponent } from './app.component';
-import { HomepageComponent } from './homepage/homepage.component';
-import { RegisterComponent } from './register/register.component';
-import { CategoryComponent } from './category/category.component';
-import { FavoriteComponent } from './favorite/favorite.component';
 import { NavMenuComponent } from './nav-menu/nav-menu.component';
+import { HomeComponent } from './home/home.component';
+import { CounterComponent } from './counter/counter.component';
+import { FetchDataComponent } from './fetch-data/fetch-data.component';
+import { RestaurantAllComponent } from './restaurant-all/restaurant-all.component';
+import { CategoryComponent } from './category/category.component';
+import { FavoritesComponent } from './favorites/favorites.component';
+import { RegisterComponent } from './register/register.component';
 import { LoginComponent } from './login/login.component';
-import { WelcomepageComponent } from './welcomepage/welcomepage.component';
+import { RandomComponent } from './random/random.component';
+import { SingleviewComponent } from './singleview/singleview.component';
+import { LogoutComponent } from './logout/logout.component';
+
+
+
 
 @NgModule({
   declarations: [
     AppComponent,
-    HomepageComponent,
-    RegisterComponent,
-    CategoryComponent,
-    FavoriteComponent,
     NavMenuComponent,
+    HomeComponent,
+    CounterComponent,
+    FetchDataComponent,
+    RestaurantAllComponent,
+    CategoryComponent,
+    FavoritesComponent,
+    RegisterComponent,
     LoginComponent,
-    WelcomepageComponent
+    RandomComponent,
+    SingleviewComponent,
+    LogoutComponent
+
   ],
   imports: [
-    BrowserModule,
-    AppRoutingModule,
-    FormsModule,
+    BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
     HttpClientModule,
-    NgbModule
+    FormsModule,
+    RouterModule.forRoot([
+      { path: '', component: CategoryComponent, pathMatch: 'full' },
+      { path: 'counter', component: CounterComponent },
+      { path: 'fetch-data', component: FetchDataComponent },
+      { path: 'restaurant-all', component: RestaurantAllComponent },
+      { path: 'category', component: CategoryComponent },
+      { path: 'register', component: RegisterComponent },
+      { path: 'login', component: LoginComponent },
+      { path: 'favorites', component: FavoritesComponent },
+      { path: 'random/:count', component: RandomComponent },
+      { path: 'singleview/:id', component: SingleviewComponent },
+      { path: 'logout', component: LogoutComponent }
+    ])
   ],
   providers: [],
   bootstrap: [AppComponent]
