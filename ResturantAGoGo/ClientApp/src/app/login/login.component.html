@@ -12,7 +12,7 @@
                [(ngModel)]="form.username"
                required
                #username="ngModel"
-               placeholder="Enter username to login"/>
+               placeholder="Enter username to login" />
         <div class="alert alert-danger"
              role="alert"
              *ngIf="username.errors && f.submitted">
@@ -27,7 +27,7 @@
                required
                minlength="6"
                #password="ngModel"
-               placeholder="Enter password to login"/>
+               placeholder="Enter password to login" />
         <div class="alert alert-danger"
              role="alert"
              *ngIf="password.errors && f.submitted">
@@ -50,9 +50,8 @@
         </div>
       </div>
     </form>
-
     <div class="alert alert-success" *ngIf="isLoggedIn">
-      Logged in as {{ roles }}.
+      Logged in as {{ TestingLogin }}.
     </div>
   </div>
 </div>

@@ -1,17 +1,17 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { Router } from '@angular/router';
-import { AuthenticateService } from '../services/authenticate.service';
-import { DatastoreService } from '../services/datastore.service';
-import { RestaurantService } from '../services/restaurant.service';
+import { AuthenticateService } from '../authenticate.service';
+import { DatastoreService } from '../datastore.service';
+import { RestaurantapiService } from '../restaurantapi.service';
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css']
 })
-
-export class LoginComponent implements OnInit {
-
+/** login component*/
+export class LoginComponent {
+  /** login ctor */
   form: any = {
     username: null,
     password: null
@@ -19,17 +19,18 @@ export class LoginComponent implements OnInit {
 
   isLoggedIn = false;
   isLoginFailed = false;
-  errorMessage = '';
+  errorMessage = 'Failed';
   roles: string[] = [];
 
-  constructor(private service: AuthenticateService, private tokenStorage: DatastoreService, public router: Router, public restaurantService: RestaurantService) { }
+  constructor(private service: AuthenticateService, private tokenStorage: DatastoreService, public router: Router, public restaurantService: RestaurantapiService) { }
   ngOnInit(): void {
+    console.log(this.tokenStorage.getUser());
     if (this.tokenStorage.getToken()) {
       this.isLoggedIn = true;
       this.roles = this.tokenStorage.getUser().roles;
+      
     }
   }
-
   onSubmit(): void {
     const { username, password } = this.form;
     this.service.login(username, password).subscribe(
@@ -40,7 +41,7 @@ export class LoginComponent implements OnInit {
         this.isLoggedIn = true;
         this.roles = this.tokenStorage.getUser().roles;
         this.restaurantService.setID(data.userId);
-        //this.reloadPage();
+            
         this.router.navigate(['/category']);
       },
       err => {
@@ -49,7 +50,6 @@ export class LoginComponent implements OnInit {
       }
     );
   }
-
   reloadPage(): void {
     window.location.reload();
   }
