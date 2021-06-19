@@ -1,4 +1,6 @@
-<h1>Testing</h1>
+<h1>Welcome to Restaurant A Go Go!</h1>
+<h2>See a list of restaurants in your area</h2>
+<h3>Can't decide?  Choose a random restaurant to visit</h3>
 <form #setForm="ngForm" (ngSubmit)="setZipCode(setForm)">
   <div>
     <input name="zip_code" type="number" placeholder="Enter Zip Code" required ngModel />
@@ -6,7 +8,7 @@
   </div>
 </form>
 
-<div *ngIf="zip_code != ''">
+<div *ngIf="zip_code >= 0">
   Undecisive? Choose one
   <div>
     <button class="nav-link text-dark" [routerLink]="['/random',1]">One random</button>

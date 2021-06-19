@@ -3,7 +3,6 @@ import { Injectable } from '@angular/core';
 const loginKey = 'auth-token';
 const userKey = 'auth-user';
 
-
 @Injectable({
   providedIn: 'root'
 })
@@ -34,5 +33,4 @@ export class DatastoreService {
     window.sessionStorage.removeItem(userKey);
     window.sessionStorage.setItem(userKey, JSON.stringify(user));
   }
-
 }

@@ -17,8 +17,6 @@ export class AuthenticateService {
   }
 
   register(userName: string, password: string): Observable<any> {
-    console.log(userName);
-    console.log(password);
     return this.http.post(dbApi + `/adduser?userName=${userName}&password=${password}`, {
     });
   }

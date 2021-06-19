@@ -11,7 +11,7 @@ import { RestaurantService } from '../services/restaurant.service';
 })
 export class CategoryComponent {
 
-  zip_code: string = '';
+  zip_code: number = -1;
   categories: string = '';
 
   constructor(private service: RestaurantService, public router: Router, public datastoreservice: DatastoreService) {
@@ -21,9 +21,11 @@ export class CategoryComponent {
     console.log(this.datastoreservice.getUser());
     this.zip_code = form.form.value.zip_code;
     console.log(this.zip_code);
+    if (this.zip_code == undefined) {
+      this.zip_code = -1;
+    }
     this.service.setZip(this.zip_code);
   }
-
   setCategoryClick(categories: string): void {
     this.categories = categories;
     console.log(this.categories);

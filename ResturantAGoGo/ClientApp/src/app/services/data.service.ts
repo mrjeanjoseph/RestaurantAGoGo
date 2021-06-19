@@ -7,8 +7,6 @@ const dbApi = 'https://localhost:44334/api/restaurant/getuser?userId=';
   providedIn: 'root'
 })
 
-
-
 export class DataService {
 
   constructor(private http: HttpClient) { }

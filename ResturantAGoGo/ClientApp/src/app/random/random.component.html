@@ -1,0 +1,11 @@
+<div *ngFor="let r of restaurants">
+  <h3>{{r.name}}</h3>
+  <h4>{{ r.address }}</h4>
+  <h4>{{ r.city }} {{ r.state }} {{ r.zip }}</h4>
+  <img width="200" height="200" src="{{ r.img }}" />
+  <br />
+  <div>
+    <a href="{{ r.url }}" target="_blank">Click here for more info</a>
+  </div>
+</div>
+
