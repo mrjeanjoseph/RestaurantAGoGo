@@ -1,0 +1,38 @@
+.lighton {
+  background-color: lightgray;
+}
+
+.lightoff {
+  background-color: darkgreen;
+}
+
+.card {
+  float: left;
+  width: 75%;
+  padding: 1rem;
+  height: 45vh;
+  margin-bottom: 1rem;
+  border: 0;
+  box-shadow: 0px 0px 8px 0.3px rgba(104,111,240,1);
+}
+
+.yelp-img {
+  position: relative;
+  overflow: hidden;
+}
+
+.yelp-img:after {
+  content: '';
+  display: block;
+  padding-top: 100%;
+}
+
+.yelp-img img {
+  width: auto;
+  height: 40vh;
+  max-width: none;
+  position: absolute;
+  left: 50%;
+  top: 0;
+  transform: translateX(-50%);
+}
