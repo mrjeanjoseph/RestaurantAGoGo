@@ -1,15 +1,13 @@
 import { Component } from '@angular/core';
-import { DatastoreService } from '../services/datastore.service';
-import { RestaurantService } from '../services/restaurant.service';
+import { DatastoreService } from '../datastore.service';
+import { RestaurantapiService } from '../restaurantapi.service';
 
 @Component({
   selector: 'app-nav-menu',
   templateUrl: './nav-menu.component.html',
   styleUrls: ['./nav-menu.component.css']
 })
-export class NavMenuComponent{
-
-
+export class NavMenuComponent {
   isExpanded = false;
 
   collapse() {
@@ -20,20 +18,27 @@ export class NavMenuComponent{
     this.isExpanded = !this.isExpanded;
   }
 
-  constructor(private restaurantservice: RestaurantService, private datastoreservice: DatastoreService) { }
+  constructor(private restaurantapiservice: RestaurantapiService, private datastoreservice: DatastoreService) {
+    
+  }
+
+  whoIsLoggedIn: string = "";
 
   checkLogin(): boolean {
     let user = this.datastoreservice.getUser();
     if (user.userName != null) {
-      if (this.restaurantservice.getID() != -1) {
-        this.restaurantservice.setID(user.userId);
-        console.log(this.restaurantservice
+      if (this.restaurantapiservice.getID() != -1)
+      {
+        this.restaurantapiservice.setID(user.userId);
+        this.whoIsLoggedIn = this.datastoreservice.getUser();
+        console.log(this.datastoreservice.getUser());
+      
       }
       return true;
     }
-    else {
+    else
+    {
       return false;
     }
   }
-
 }
