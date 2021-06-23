@@ -22,40 +22,25 @@ export class RegisterComponent implements OnInit {
 
   ngOnInit(): void {
   }
-
-  //onSubmit(): void {
-  //  const { username, password } = this.form;
-  //  console.log(this.form);
-  //  this.service.register(username, password).subscribe(
-  //    data => {
-  //      console.log(data);
-  //      this.isSuccessful = true;
-  //      this.isSignUpFailed = false;
-  //    },
-  //    err => {
-  //      this.errorMessage = err.error.message;
-  //      this.isSignUpFailed = true;
-  //    }
-  //  );
-  //}
-
+    
   onSubmit(form: NgForm): void {
     let username:string = form.form.value.username;
     let password:string = form.form.value.password;
-    //const { username, password } = this.form;
-    /*console.log(this.form);*/
     console.log(username);
     console.log(password);
+        
     this.service.register(username, password).subscribe(
       data => {
+        if (data == null) {
+          this.isSuccessful = false;
+          this.isSignUpFailed = true;
+        }
+        else {
+          this.isSuccessful = true;
+          this.isSignUpFailed = false;
+        }
         console.log(data);
-        this.isSuccessful = true;
-        this.isSignUpFailed = false;
-      },
-      err => {
-        this.errorMessage = err.error.message;
-        this.isSignUpFailed = true;
-      }
-    );
+      });
+    
   }
 }

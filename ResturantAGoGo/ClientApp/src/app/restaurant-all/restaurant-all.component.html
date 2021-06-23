@@ -1,66 +1,40 @@
-<!--<h2 class="card-title text-center">Welcome to Restaurant A Go Go!</h2>
-<h4 class="card-text text-center">See a list of restaurants in your area</h4>
-
-<div class="form-group">
-  <label for="search-text">Search text</label>
-  <input type="email" class="form-control" id="search-text"
-         [(ngModel)]="listFilter" placeholder="Enter Text to search">
-</div>
-
-<div class="row mb-3" *ngFor="let r of filterRestaurantList">
-  <div class="container-fluid col-md-6 h-100">
-    <div class="card card-block">
-      <div class="card-body">
-        <h4>{{ r.name }}</h4>
-        <h4>{{ r.address }}</h4>
-        <h5>{{ r.city }} {{ r.state }} {{ r.zip }}</h5>
-        <p *ngFor="let t of r.type">{{ t.title }}</p>
-        <a class="btn btn-primary mr-3" (click)="addFavorite(r)">Add to Favorites</a>
-        <a class="btn btn-primary" [routerLink]="['/singleview',r.yelpID]">View more details</a>
-      </div>
-    </div>
-  </div>
-
-  <div class="container-fluid col-md-6 h-50">
-    <div class="card card-block">
-      <div class="card-body yelp-img">
-        <img class="card-img-top img-fluid" src="{{r.img}}" alt="Alternate Text" />
-      </div>
-    </div>
-  </div>
-</div>-->
-<!-- I am calling the toggleFavoriate(r) method on line 23 -->
-
-
-
 <h2 class="card-title text-center">Welcome to Restaurant A Go Go!</h2>
 <h4 class="card-text text-center">See a list of restaurants in your area</h4>
 
-<div class="form-group">
-  <label for="search-text">Search text</label>
+<div class="form-group container" style="width: 35%">
+  <label for="search-text"></label>
   <input type="email" class="form-control" id="search-text"
-         [(ngModel)]="listFilter" placeholder="Enter Text to search">
+         [(ngModel)]="listFilter" placeholder="Search for a restaurant in your area here">
 </div>
+<h1 *ngIf="filteredRestaurantLists.length == 0">
+  Please wait.  Loading results.
+</h1>
 
-<div class="row mb-3" *ngFor="let r of filteredRestaurantLists">
-  <div class="container-fluid col-md-6 h-100">
-    <div class="card card-block">
-      <div class="card-body">
-        <h3>{{ r.name }}</h3>
-        <h5>{{ r.address }}</h5>
-        <h5>{{ r.city }} {{ r.state }} {{ r.zip }}</h5>
-        <p class="horizontal" *ngFor="let t of r.type">{{ t.title }}</p>
-        <!--<a class="btn btn-primary mr-3" [ngClass]="light2?'lighton':'lightoff'" (click)="addFavorite(r); toggleLight2(r)">Add to Favorites</a>-->
-        <a class="btn btn-primary mr-3" (click)="addFavorite(r)">Add to Favorites</a>
-        <a class="btn btn-primary" [routerLink]="['/singleview',r.yelpID]">View more details</a>
+
+<div class="restaurantcontainer">
+  <div class="row mb-3" *ngFor="let r of filteredRestaurantLists">
+    <div class="container h-100">
+      <div class="card card-block">
+        <div class="card-body">
+          <h3>{{ r.name }}</h3>
+          <h5>{{ r.address }}</h5>
+          <h5>{{ r.city }} {{ r.state }} {{ r.zip }}</h5>
+          <div class="listHorizontal">
+            <p *ngFor="let t of r.type"> {{ t.title }}&emsp;</p>
+          </div>
+          <a class="btn btn-primary mr-3" [ngClass]="checkFavorite(r)?'favon':'favoff'" (click)="addFavorite(r)">Add to Favorites</a>
+          <a class="btn btn-primary" [routerLink]="['/singleview',r.yelpID]">View more details</a>
+        </div>
       </div>
     </div>
-  </div>
-  <div class="container-fluid col-md-6 h-50">
+    <!--<div class="container-fluid col-md-6 h-50">
     <div class="card card-block">
       <div class="card-body yelp-img">
         <img class="card-img-top img-fluid" src="{{r.img}}" alt="Alternate Text" />
       </div>
     </div>
+  </div>-->
   </div>
+
 </div>
+

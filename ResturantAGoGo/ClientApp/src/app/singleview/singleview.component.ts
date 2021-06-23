@@ -8,7 +8,7 @@ import { RestaurantapiService } from '../restaurantapi.service';
     templateUrl: './singleview.component.html',
     styleUrls: ['./singleview.component.css']
 })
-/** singleview component*/
+
 export class SingleviewComponent {
 
   restaurant: Restaurant = {
@@ -27,20 +27,15 @@ export class SingleviewComponent {
     latitude: 0,
     longitude: 0,
   }
-  //interface Category {
-  //  alias: "",
-  //  title: ""
-  /*}*/
-    
-    /** singleview ctor */
+
     constructor(private service: RestaurantapiService, public router: Router, public route: ActivatedRoute) {
 
   }
 
   ngOnInit() {
-    let id: string = this.route.snapshot.paramMap.get("id");
+    let id: string | null = this.route.snapshot.paramMap.get("id");
     this.service.getRestaurantbyID(id).subscribe(
-      (response) => {
+      (response: any) => {
         this.restaurant.name = response.name;
         this.restaurant.address = response.location.address1;
         this.restaurant.city = response.location.city;

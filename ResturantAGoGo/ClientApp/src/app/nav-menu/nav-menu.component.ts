@@ -22,16 +22,16 @@ export class NavMenuComponent {
     
   }
 
-  whoIsLoggedIn: string = "";
-
+  whoisloggedin: string = "";
   checkLogin(): boolean {
     let user = this.datastoreservice.getUser();
     if (user.userName != null) {
       if (this.restaurantapiservice.getID() != -1)
       {
         this.restaurantapiservice.setID(user.userId);
-        this.whoIsLoggedIn = this.datastoreservice.getUser();
-        console.log(this.datastoreservice.getUser());
+        console.log(this.restaurantapiservice.getID());
+        this.whoisloggedin = user.userName;
+        console.log(this.whoisloggedin);
       
       }
       return true;

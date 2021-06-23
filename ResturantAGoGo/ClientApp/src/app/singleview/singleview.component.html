@@ -1,13 +1,19 @@
-<h3>{{ restaurant.name }}</h3>
-<h4>{{ restaurant.address }}</h4>
-<h4>{{ restaurant.city }} {{ restaurant.state }} {{ restaurant.zip }}</h4>
-<h4>Rating: {{ restaurant.rating }}</h4>
-<h4>{{ restaurant.phone }}</h4>
-<h4>Price: {{ restaurant.price }}</h4>
-<p>Price Per Person: $=Under $10, $$=$11-$30, $$$=$31-$60, $$$$=over $61</p>
-<img width="200" height="200" src="{{ restaurant.img }}" />
-<br />
-<div>
-  <a href="{{ restaurant.url }}">Click here for more info</a>
+<h1 class="justify-content-center">Your search result</h1>
+
+<div class="container-fluid">
+  <div class="card mb-3 pt-4">
+    <h3 class="card-header"> {{ restaurant.name }} </h3>
+    <div class="card-body col d-flex justify-content-center">
+      <img width="250" height="250" src="{{ restaurant.img }}" />
+    </div>
+    <div class="card-body d-flex justify-content-center">
+      <h6 class="card-title"> {{ restaurant.address }} <br />{{ restaurant.city }} {{ restaurant.state }} {{ restaurant.zip }} </h6>
+    </div>
+    <hr />
+    <div class="card-body col d-flex justify-content-center">
+      <a class="btn btn-primary" style="margin-right:10px" href="{{ restaurant.url }}" target="_blank">Click here for more info</a>
+      <a class="btn btn-danger mr-3" (click)="removeFavorite(f.favoriteId,f.userId)">Remove from Favorites</a>
+      <a class="btn btn-success" href="https://www.google.com/maps/place/ {{ restaurant.address }}+{{ restaurant.city }}+{{ restaurant.zip }}" target="_blank">Click here for map</a>
+    </div>
+  </div>
 </div>
-<a href="https://www.google.com/maps/place/ {{ restaurant.address }}+{{ restaurant.city }}+{{ restaurant.zip }}">Click here for map</a>
