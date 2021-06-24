@@ -33,8 +33,8 @@ export class SingleviewComponent {
   }
 
   ngOnInit() {
-    let id: string | null = this.route.snapshot.paramMap.get("id");
-    this.service.getRestaurantbyID(id).subscribe(
+    let id = this.route.snapshot.paramMap.get("id");
+    this.service.getRestaurantbyID("id").subscribe(
       (response: any) => {
         this.restaurant.name = response.name;
         this.restaurant.address = response.location.address1;
